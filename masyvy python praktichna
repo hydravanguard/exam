@@ -1,0 +1,43 @@
+def sort_array(arr):
+    positives = []
+    zeros = []
+    negatives = []
+
+    for x in arr:
+        if x > 0:
+            positives.append(x)
+        elif x == 0:
+            zeros.append(x)
+        else:
+            negatives.append(x)
+
+    positives.sort()
+    negatives.sort(reverse=True)
+
+    return positives + zeros + negatives
+
+def process_arrays(a, b):
+    diff_count = 0
+    for x in a:
+        if x not in b:
+            diff_count += 1
+    for x in b:
+        if x not in a:
+            diff_count += 1
+
+    for i in range(len(a)):
+        if a[i] not in b:
+            a[i] = 0
+
+    a = sort_array(a)
+    b = sort_array(b)
+
+    print("Кількість неоднакових елементів:", diff_count)
+    print("Перший масив після змін і сортування:", a)
+    print("Другий масив після сортування:", b)
+
+
+a = list(map(int, input("Введіть перший масив через пробіл: ").split()))
+b = list(map(int, input("Введіть другий масив через пробіл: ").split()))
+
+process_arrays(a, b)
